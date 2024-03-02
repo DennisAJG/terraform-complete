@@ -11,7 +11,7 @@ terraform {
 
   backend "s3" {
     bucket = "awsterraformremotestatedennis20240228114918186300000001"
-    key    = "aws_vm/terraform.tfstate"
+    key    = "commands/terraform.tfstate"
     region = "us-east-1"
   }
 }
@@ -19,22 +19,12 @@ terraform {
 provider "aws" {
   # Configuration options
   region  = "us-east-1"
-  profile = "terraform-curso"
+  profile = "default"
 
   default_tags {
     tags = {
       owner      = "dennis gusmão"
       managed-by = "terraform"
     }
-  }
-}
-
-# Utilizando o data source para coletar um recurso (backend) já criado na AWS
-data "terraform_remote_state" "vpc" {
-  backend = "s3"
-  config = {
-    bucket = "awsterraformremotestatedennis20240228114918186300000001"
-    key    = "aws_vpc/terraform.tfstate"
-    region = "us-east-1"
   }
 }

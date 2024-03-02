@@ -4,7 +4,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.48.0"
+      version = ">=3.48.0"
     }
   }
 
@@ -18,16 +18,5 @@ terraform {
 
 provider "azurerm" {
   features {}
-    skip_provider_registration = "true"
-
-}
-
-data "terraform_remote_state" "vnet" {
-  backend = "azurerm"
-  config = {
-    resource_group_name = "rg-terraform-state"
-    storage_account_name = "dennisterraformstate"
-    container_name = "remote-state-azure"
-    key = "azure-vnet/terraform.tfstate"
-  }
+  skip_provider_registration = "true"
 }
