@@ -3,7 +3,7 @@ resource "aws_key_pair" "aws-key" {
   public_key = file("~/.ssh/aws-key.pub")
 }
 
-resource "aws_instance" "ec2-aws-terraform" {
+resource "aws_instance" "ec2_aws_terraform" {
   ami                         = "ami-07d9b9ddc6cd8dd30"
   instance_type               = "t2.micro"
   key_name                    = aws_key_pair.aws-key.key_name
