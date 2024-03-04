@@ -8,13 +8,21 @@ terraform {
       version = ">=5.38.0"
     }
   }
-
-  backend "s3" {
-    bucket = "awsterraformremotestatedennis20240228114918186300000001"
-    key    = "commands/terraform.tfstate"
-    region = "us-east-1"
+  backend "azurerm" {
+    resource_group_name  = "rg-terraform-state"
+    storage_account_name = "dennisterraformstate"
+    container_name       = "remote-state-azure"
+    key                  = "azure-vnet/terraform.tfstate"
   }
+  #backend "s3" {
+  #  bucket = "awsterraformremotestatedennis20240228114918186300000001"
+  # key    = "commands-terraform-1/terraform.tfstate"
+  #region = "us-east-1"
+  #}
 }
+
+
+
 
 provider "aws" {
   # Configuration options

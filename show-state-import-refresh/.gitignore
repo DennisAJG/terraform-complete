@@ -1,6 +1,7 @@
 curso-terraform_accessKeys.csv 
 azure_credentias.png
 azure_credentials.txt
+plan.out
 
 .terraform/*
 .terraform.lock.hcl
