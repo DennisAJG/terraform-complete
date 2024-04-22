@@ -10,6 +10,12 @@ terraform {
 }
 
 provider "azurerm" {
-  features {}
+  features {
+    resource_group {
+      prevent_deletion_if_contains_resources = false
+    }
+  }
   skip_provider_registration = "true"
 }
+
+#OBS: A Azure não permite criar tags padrões dentro do bloco Main

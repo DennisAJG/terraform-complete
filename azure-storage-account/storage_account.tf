@@ -1,12 +1,12 @@
 resource "azurerm_resource_group" "resource_group" {
-  name     = var.resource_group_name
+  name     = ""
   location = var.location
 
   tags = local.common_tags
 }
 
 resource "azurerm_storage_account" "storage_account" {
-  name                     = var.storage_account_name
+  name                     = ""
   resource_group_name      = azurerm_resource_group.resource_group.name
   location                 = var.location
   account_tier             = var.account_tier
@@ -15,10 +15,7 @@ resource "azurerm_storage_account" "storage_account" {
   tags = local.common_tags
 }
 
-
-resource "azurerm_storage_container" "storage_container" {
-  name                 = var.container_name
+resource "azurerm_storage_container" "container" {
+  name                 = ""
   storage_account_name = azurerm_storage_account.storage_account.name
 }
-
-

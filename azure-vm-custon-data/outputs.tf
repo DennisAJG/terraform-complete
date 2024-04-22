@@ -20,7 +20,7 @@ provider "azurerm" {
   features {}
 }
 
-data "terraform_remote_state" "name" {
+#data "terraform_remote_state" "name" {
   
-}
+#}
 
