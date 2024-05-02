@@ -10,9 +10,10 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "awsterraformremotestatedennis20240228114918186300000001"
-    key    = "aws_vpc/terraform.tfstate"
-    region = "us-east-1"
+    profile = "terraform-curso"
+    bucket  = "dennisremotestatecurso"
+    key     = "aws_vpc/terraform.tfstate"
+    region  = "us-east-1"
   }
 }
 
@@ -23,7 +24,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      owner      = "dennis gusmão"
+      owner      = "dennisgusmao"
       managed-by = "terraform"
     }
   }
