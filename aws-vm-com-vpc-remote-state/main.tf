@@ -12,7 +12,7 @@ terraform {
   backend "s3" {
     profile = "terraform-curso"
     bucket  = "dennisremotestatecurso"
-    key     = "aws_vpc/terraform.tfstate"
+    key     = "aws_ec2/terraform.tfstate"
     region  = "us-east-1"
   }
 }
