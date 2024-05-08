@@ -20,3 +20,13 @@ provider "azurerm" {
   features {}
   skip_provider_registration = "true"
 }
+
+data "terraform_remote_state" "name" {
+  backend = "azurerm"
+  config = {
+    resource_group_name = "rg-terraform-state"
+    storage_account_name = "dennisgusmaoterraformstate"
+    container_name = "remote-state"
+    key = "azure-vnet/terraform.tfstate"
+  }
+}

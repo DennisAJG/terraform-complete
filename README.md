@@ -11,3 +11,9 @@ https://registry.terraform.io/browse/modules
 
 # Documentação do terraform-cli
 https://developer.hashicorp.com/terraform/cli
+
+# Comando terraform show:
+https://developer.hashicorp.com/terraform/cli/commands/show
+
+# Comando terraform state:
+https://developer.hashicorp.com/terraform/cli/commands/show

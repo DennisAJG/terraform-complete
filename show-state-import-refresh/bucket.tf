@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "bucket_um" {
+resource "aws_s3_bucket" "bucket_1" {
   bucket = "dennis-terraform-commands-1"
 }
 
