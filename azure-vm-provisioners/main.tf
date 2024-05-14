@@ -8,12 +8,12 @@ terraform {
     }
   }
 
- # backend "azurerm" {
- #   resource_group_name  = "rg-terraform-state"
- #   storage_account_name = "dennisterraformstate"
- #   container_name       = "remote-state-azure"
- #   key                  = "azure-vm-provisioners/terraform.tfstate"
- # }
+  backend "azurerm" {
+    resource_group_name  = "rg-terraform-state"
+    storage_account_name = "dennisterraformstate"
+    container_name       = "remote-state-azure"
+    key                  = "azure-vm-provisioners/terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
