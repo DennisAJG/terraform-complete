@@ -1,41 +1,32 @@
 terraform {
-  required_version = ">=1.0"
-
+  required_version = ">= 1.0.0"
 
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">=5.38.0"
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">=3.48.0"
     }
   }
 
-  backend "s3" {
-    profile = "terraform-curso"
-    bucket  = "dennisremotestatecurso"
-    key     = "aws_vm_user_data/terraform.tfstate"
-    region  = "us-east-1"
+  backend "azurerm" {
+    resource_group_name  = "rg-terraform-state"
+    storage_account_name = "dennisterraformstate"
+    container_name       = "remote-state-azure"
+    key                  = "azure-vm-custom-data/terraform.tfstate"
   }
 }
 
-provider "aws" {
-  # Configuration options
-  region  = "us-east-1"
-  profile = "terraform-curso"
-
-  default_tags {
-    tags = {
-      owner      = "dennis gusmão"
-      managed-by = "terraform"
-    }
-  }
+provider "azurerm" {
+  features {}
+  skip_provider_registration = "true"
 }
 
-# Utilizando o data source para coletar um recurso (backend) já criado na AWS
-data "terraform_remote_state" "vpc" {
-  backend = "s3"
+data "terraform_remote_state" "vnet" {
+  backend = "azurerm"
   config = {
-    bucket = "dennisremotestatecurso"
-    key    = "aws_vpc/terraform.tfstate"
-    region = "us-east-1"
+    resource_group_name = "rg-terraform-state"
+    storage_account_name = "dennisterraformstate"
+    container_name = "remote-state-azure"
+    key = "azure-vnet/terraform.state"
   }
 }
