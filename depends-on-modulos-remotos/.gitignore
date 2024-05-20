@@ -1,0 +1,8 @@
+curso-terraform_accessKeys.csv 
+azure_credentias.png
+azure_credentials.txt
+
+.terraform/*
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
