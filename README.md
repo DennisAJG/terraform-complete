@@ -17,3 +17,7 @@ https://developer.hashicorp.com/terraform/cli/commands/show
 
 # Comando terraform state:
 https://developer.hashicorp.com/terraform/cli/commands/show
+
+# Lifecycle:
+https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle
+Prevente_destroy faz o processo de não destruir um determinado recurso acidentalmente 
