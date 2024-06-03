@@ -20,4 +20,9 @@ https://developer.hashicorp.com/terraform/cli/commands/show
 
 # Lifecycle:
 https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle
-Prevente_destroy faz o processo de não destruir um determinado recurso acidentalmente 
+Prevente_destroy: faz o processo de não destruir um determinado recurso acidentalmente 
+
+# Conditional Expressions:
+https://developer.hashicorp.com/terraform/language/expressions/conditionals
+https://developer.hashicorp.com/terraform/language/expressions/operators
+https://developer.hashicorp.com/terraform/language/expressions/custom-conditions#condition-expressions
