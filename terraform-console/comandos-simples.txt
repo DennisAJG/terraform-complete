@@ -1,0 +1,19 @@
+> [for key,value on local.common_tags : value]
+[
+    "West Europe",
+    "terraform",
+    "dennisgusmao",
+]
+
+> {for key,value in local.common_tags : value => key}
+{
+    "West Europe" = "Location"
+    "dennisgusmao" = "owner"
+    "terraform" = "managed-by"
+}
+
+> {for key,value in local.common_tags : value => key if value != "terraform"}
+{
+    "West Europe" = "Location"
+    "dennisgusmao" = "owner"
+}
