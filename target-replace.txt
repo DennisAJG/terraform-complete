@@ -1,0 +1,7 @@
+comandos target:
+terraform plan -target aws_key_pair.key -out plan.out  -> faz o processo de construção apenas de um recurso expecifico 
+
+comandos replace:
+terraform plan -repĺace aws_instance.vm -out plan.out -> usado para casa um recurso esteja com falha 
+
+
