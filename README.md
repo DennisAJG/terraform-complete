@@ -26,3 +26,7 @@ Prevente_destroy: faz o processo de não destruir um determinado recurso acident
 https://developer.hashicorp.com/terraform/language/expressions/conditionals
 https://developer.hashicorp.com/terraform/language/expressions/operators
 https://developer.hashicorp.com/terraform/language/expressions/custom-conditions#condition-expressions
+
+# Comando terraform console 
+https://developer.hashicorp.com/terraform/cli/commands/console
+
