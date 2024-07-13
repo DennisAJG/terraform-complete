@@ -18,7 +18,7 @@ terraform {
     resource_group_name = "rg-terraform-state"
     storage_account_name = "dennisgusmaoterraformstate"
     container_name = "remote-state"
-    key = "pipeline-gitlab/terraform.tfstate"
+    key = "pipeline-azuredevops/terraform.tfstate"
   }
 }
 

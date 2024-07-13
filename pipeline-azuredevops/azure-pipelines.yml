@@ -1,0 +1,91 @@
+name: 1.0
+pool: 
+  vmImage: ubuntu-latest
+trigger: 
+- main
+variables: 
+- group: AWS-Credentials
+- group: AZURE-Credentials
+- group: Public-Keys
+
+stages:
+  - stage: validade_plan
+    displayName: validade & plan 
+    jobs:
+      - job: validade_plan
+        displayName: validade & plan
+        steps:
+          - script: |
+              terraform init
+              terraform validade
+              terraform plan -out plan.out
+            displayName: Terraform validade & plan 
+            env:
+              AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+              AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
+              ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+              ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+              ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+              ARM_TENANT_ID: $(ARM_TENANT_ID)
+              TF_VAR_aws_key_pub: $(TF_VAR_aws_key_pub)
+              TF_VAR_azure_key_pub: $(TF_VAR_azure_key_pub)
+          - publish: $(Build.SourcesDirectory)/plan.out
+            artifact: plan 
+            displayName: Public Plan
+
+  - stage: apply
+    displayName: Apply 
+    jobs:
+      - job: approve_apply
+        pool: server 
+        displayName: Approve Apply 
+        steps:
+          - task: ManualValidation@0  #analisa o plan da pipeline 
+            timeoutInMinutes: 1440
+      - job: apply
+        displayName: Terraform Apply
+        dependsOn: approve_apply
+        steps:
+          - download: current
+            artifact: plan 
+            displayName: Download plan 
+          - script: |
+              terraform init
+              terraform apply $(Pipeline.Workspace)/plan/plan.out
+            displayName: Terraform apply 
+            env:
+              AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+              AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
+              ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+              ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+              ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+              ARM_TENANT_ID: $(ARM_TENANT_ID)
+              TF_VAR_aws_key_pub: $(TF_VAR_aws_key_pub)
+              TF_VAR_azure_key_pub: $(TF_VAR_azure_key_pub)
+  
+  - stage: destroy
+    displayName: Destroy 
+    jobs:
+      - job: approve_destroy
+        pool: server 
+        displayName: Approve Destroy 
+        steps:
+          - task: ManualValidation@0  #analisa o plan da pipeline 
+            timeoutInMinutes: 1440
+      - job: destroy 
+        displayName: Terraform Destroy
+        dependsOn: approve_destroy
+        steps:
+          - script: |
+              terraform init
+              terraform destroy --auto-approve
+            displayName: Terraform destroy 
+            env:
+              AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+              AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
+              ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+              ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+              ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+              ARM_TENANT_ID: $(ARM_TENANT_ID)
+              TF_VAR_aws_key_pub: $(TF_VAR_aws_key_pub)
+              TF_VAR_azure_key_pub: $(TF_VAR_azure_key_pub)
